@@ -29,6 +29,8 @@ public class PessoaController
 								 @RequestParam("cpf") String cpf,
 								 @RequestParam("email") String email)
 	{
+		if(dao == null)
+			dao = new PessoaHashMap();
 		Pessoa pessoa = new Pessoa();
 		pessoa.setCpf(cpf);
 		pessoa.setEmail(email);
@@ -40,6 +42,8 @@ public class PessoaController
 	@RequestMapping("editarPessoa")
 	public String alterarPessoa(Long id, Model model)
 	{
+		if(dao == null)
+			dao = new PessoaHashMap();
 		model.addAttribute("pessoa", dao.getPessoa(id));
 		return "pessoa/editarPessoa";
 	}
@@ -47,6 +51,8 @@ public class PessoaController
 	@RequestMapping("alterarPessoa")
 	public String alteraPessoa(Pessoa pessoa) 
 	{
+		if(dao == null)
+			dao = new PessoaHashMap();
 		dao.alterar(pessoa);
 		return "redirect:listaPessoas";
 	}
@@ -54,6 +60,8 @@ public class PessoaController
 	@RequestMapping("removePessoa")
 	public String removerPessoa(Pessoa pessoa)
 	{
+		if(dao == null)
+			dao = new PessoaHashMap();
 		dao.excluir(pessoa);
 		return "redirect:listaPessoas";
 	}
@@ -61,6 +69,8 @@ public class PessoaController
 	@RequestMapping("listaPessoas")
 	public String listaCadastroPessoa(Model model)
 	{
+		if(dao == null)
+			dao = new PessoaHashMap();
 		model.addAttribute("pessoas", dao.list());
 		return "pessoa/listaPessoa";
 	}
